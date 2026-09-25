@@ -12,6 +12,8 @@ import { mediaRoutes } from "./routes/media";
 import { commentRoutes } from "./routes/comments";
 import { reportRoutes } from "./routes/reports";
 import { moderationRoutes } from "./routes/moderation";
+import { accessibilityRoutes } from "./accessibility/routes";
+import { accessibilityAdminRoutes } from "./accessibility/admin-routes";
 
 export async function buildApp() {
   const app = Fastify({
@@ -59,6 +61,8 @@ export async function buildApp() {
     api.register(commentRoutes);
     api.register(reportRoutes);
     api.register(moderationRoutes);
+    api.register(accessibilityRoutes);
+    api.register(accessibilityAdminRoutes);
   }, { prefix: "/api/v1" });
 
   app.setErrorHandler((error, request, reply) => {

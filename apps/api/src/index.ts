@@ -1,6 +1,7 @@
 import { buildApp } from "./app";
 import { pool } from "./db";
 import { closeQueues } from "./queue";
+import { closeAccessibilityGraphCache } from "./accessibility/cache";
 
 const app = await buildApp();
 
@@ -15,6 +16,7 @@ async function shutdown(signal: string) {
   app.log.info({ signal }, "shutting down");
   await app.close();
   await closeQueues();
+  await closeAccessibilityGraphCache();
   await pool.end();
   process.exit(0);
 }
